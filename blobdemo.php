@@ -1,9 +1,9 @@
 <?php
 class BobDemo{
 	const DB_HOST = 'localhost';
-	const DB_NAME = 'classicmodels';
-	const DB_USER = 'root';
-	const DB_PASSWORD = '';
+	const DB_NAME = 'blobdemo';
+	const DB_USER = 'blobsite';
+	const DB_PASSWORD = 'password';
 
 	private $conn = null;
 
@@ -114,22 +114,22 @@ $blobObj = new BobDemo();
 //$blobObj->insertBlob('images/php-mysql-blob.gif',"image/gif");
 
 
-// $a = $blobObj->selectBlob(1);
-// header("Content-Type:" . $a['mime']);
-// echo $a['data'];
+ //$a = $blobObj->selectBlob(1);
+ //header("Content-Type:" . $a['mime']);
+ //echo $a['data'];
 
 
 
 // test insert pdf
-//$blobObj->insertBlob('pdf/php-mysql-blob.pdf',"application/pdf");
+$blobObj->insertBlob('pdf/php-mysql-blob.pdf',"application/pdf");
 
 //$a = $blobObj->selectBlob(2);
 // save it to the pdf file
 //file_put_contents("pdf/output.pdf", $a['data']);
 
-// $a = $blobObj->selectBlob(2);
-// header("Content-Type:" . $a['mime']);
-// echo $a['data'];
+ $a = $blobObj->selectBlob(2);
+ header("Content-Type:" . $a['mime']);
+ echo $a['data'];
 
 
 // replace the PDF by gif file
