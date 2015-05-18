@@ -1,9 +1,9 @@
 <?php
- header("Content-type: image/png");
+ 
  $img = imagecreatetruecolor(500,500);
  
 $ink = imagecolorallocate($img,255,255,255);
-$redink = imagecolorallocate($img,255,255,0);
+$redink = imagecolorallocate($img,255,0,0);
  
 /*
 for($i=0;$i<500;$i++) {
@@ -68,7 +68,7 @@ for ($x=-150; $x<=150; $x= $x+50) {
     }
 }
 
-
+header("Content-type: image/png");
 imagepng($img);
 imagedestroy($img);
  
