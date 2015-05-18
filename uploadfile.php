@@ -21,6 +21,7 @@ class BobDemo{
 			$this->conn = new PDO($connectionString,
 					BobDemo::DB_USER,
 					BobDemo::DB_PASSWORD);
+                        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			//for prior PHP 5.3.6
 			//$conn->exec("set names utf8");
 
@@ -110,8 +111,10 @@ class BobDemo{
 		$this->conn = null;
 	}
 }
+try
+{
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //if (!array_key_exists('uploadedimage', $_FILES)) {
+    if (array_key_exists('uploadedimage', $_FILES)) {
         $image = $_FILES['uploadedimage'];
 
         $info = getimagesize($image['tmp_name']);
@@ -125,7 +128,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	        // finally, redirect the user to view the new image
 	        //header('Location: uploadfile.php?id=' . $id);
 	        //exit;
-    //}
+    }
+}
+} catch (Exception $e) {
+    echo($e->getMessage());
 }
 
 ?>

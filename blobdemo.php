@@ -127,7 +127,7 @@ $blobObj = new BobDemo();
 // save it to the pdf file
 //file_put_contents("pdf/output.pdf", $a['data']);
 
- $a = $blobObj->selectBlob(4);
+ $a = $blobObj->selectBlob(1);
  header("Content-Type:" . $a['mime']);
  echo $a['data'];
 

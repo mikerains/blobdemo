@@ -46,15 +46,15 @@ for ($x=0; $x<50; $x=$x + 0.05) {
 }
 
 for ($y=-150; $y<=150; $y= $y+50) {
+    $plot_y = 250 + $y;
     for ($x=-10; $x<=10; $x++) {
         $plot_x = 250 + $x;
-        $plot_y = 250 + $y;
         imagesetpixel($img, $plot_x, $plot_y, $redink);
     }
 }
 for ($x=-150; $x<=150; $x= $x+50) {
+    $plot_x = 250 + $x;
     for ($y=-10; $y<=10; $y++) {
-        $plot_x = 250 + $x;
         $plot_y = 250 + $y;
         imagesetpixel($img, $plot_x, $plot_y, $redink);
     }
