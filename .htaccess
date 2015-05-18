@@ -1,0 +1,6 @@
+# Apache configuration file (see httpd.apache.org/docs/2.2/mod/quickreference.html)
+
+# disable directory listing
+# Options -Indexes
+php_value upload_max_filesize 10M
+php_value post_max_size 10M

@@ -1,4 +1,5 @@
 <?php
+
 class BobDemo{
 	const DB_HOST = 'localhost';
 	const DB_NAME = 'blobdemo';
@@ -44,7 +45,10 @@ class BobDemo{
 		$stmt->bindParam(':mime',$mime);
 		$stmt->bindParam(':data',$blob,PDO::PARAM_LOB);
 
-		return $stmt->execute();
+		$stmt->execute();
+                $id = $this->conn->lastInsertId();
+                return $id;
+                
 	}
 
 	/**
@@ -106,39 +110,32 @@ class BobDemo{
 		$this->conn = null;
 	}
 }
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //if (!array_key_exists('uploadedimage', $_FILES)) {
+        $image = $_FILES['uploadedimage'];
 
+        $info = getimagesize($image['tmp_name']);
 
-$blobObj = new BobDemo();
+        $blobObj = new BobDemo();
 
-// test insert gif image
-//$blobObj->insertBlob('images/php-mysql-blob.gif',"image/gif");
+    $id = $blobObj->insertBlob($image['tmp_name'],$info["mime"]);
+    
+    
+	 
+	        // finally, redirect the user to view the new image
+	        //header('Location: uploadfile.php?id=' . $id);
+	        //exit;
+    //}
+}
 
-
- //$a = $blobObj->selectBlob(1);
- //header("Content-Type:" . $a['mime']);
- //echo $a['data'];
-
-
-
-// test insert pdf
-//$blobObj->insertBlob('pdf/php-mysql-blob.pdf',"application/pdf");
-
-//$a = $blobObj->selectBlob(2);
-// save it to the pdf file
-//file_put_contents("pdf/output.pdf", $a['data']);
-
- $a = $blobObj->selectBlob(4);
- header("Content-Type:" . $a['mime']);
- echo $a['data'];
-
-
-// replace the PDF by gif file
-//$blobObj->updateBlob(2, 'images/php-mysql-blob.gif', "image/gif");
-
-//$a = $blobObj->selectBlob(2);
-//header("Content-Type:" . $a['mime']);
-//echo $a['data'];
-
-
-
-
+?>
+<HTML><BODY>
+    
+        <form method="post" action="uploadfile.php" enctype="multipart/form-data">
+                <div>
+                    <input type="file" name="uploadedimage" />
+                    <input type="submit" value="Upload Image" />
+                </div>
+            </form>
+        
+    </BODY></HTML>
